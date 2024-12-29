@@ -1,5 +1,11 @@
 # broker-ui
 
+## 0.0.3
+
+### Patch Changes
+
+- 0a61edf: test3
+
 ## 0.0.2
 
 ### Patch Changes
