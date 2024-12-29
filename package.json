@@ -1,11 +1,11 @@
 {
-  "name": "tui",
-  "private": true,
+  "name": "broker-ui",
   "version": "0.0.1",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
+    "ci": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
