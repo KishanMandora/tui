@@ -14,31 +14,28 @@ jobs:
   ci:
     runs-on: ubuntu-latest
 
-    # Add these permissions for pr and release
-    permissions:
-      contents: write
-      pull-requests: write
-
     steps:
       - uses: actions/checkout@v4
+        with:
+          # Add this to ensure all history is fetched
+          fetch-depth: 0
 
       - name: Use Node.js
         uses: actions/setup-node@v4
         with:
           node-version: "20"
 
-      # Add this step to setup pnpm
       - name: Setup pnpm
         uses: pnpm/action-setup@v2
         with:
           version: latest
 
-      # Update this to use pnpm instead of npm
       - name: Install dependencies
         run: pnpm install
 
       - name: Run CI
         run: pnpm run ci
+
       - name: Creating .npmrc
         run: |
           cat << EOF > "$HOME/.npmrc"
@@ -51,8 +48,10 @@ jobs:
         id: changesets
         uses: changesets/action@v1
         with:
-          version: pnpm bump  # Change to pnpm
-          publish: pnpm release  # Change to pnpm
+          version: pnpm bump
+          publish: pnpm release
+          # Add this to specify the base branch
+          # base: main
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
