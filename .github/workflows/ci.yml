@@ -22,12 +22,18 @@ jobs:
         with:
           node-version: "20"
 
+      # Add this step to setup pnpm
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: latest
+
+      # Update this to use pnpm instead of npm
       - name: Install dependencies
-        run: npm install
+        run: pnpm install
 
       - name: Run CI
-        run: npm run ci
-
+        run: pnpm run ci
       - name: Creating .npmrc
         run: |
           cat << EOF > "$HOME/.npmrc"
@@ -40,8 +46,8 @@ jobs:
         id: changesets
         uses: changesets/action@v1
         with:
-          version: npm bump
-          publish: npm run release
+          version: pnpm bump  # Change to pnpm
+          publish: pnpm release  # Change to pnpm
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
