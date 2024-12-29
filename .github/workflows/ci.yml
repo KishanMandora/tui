@@ -27,3 +27,12 @@ jobs:
 
       - name: Run CI
         run: npm run ci
+      
+      - name: Create Release Pull Request or Publish
+        id: changesets
+        uses: ./
+        with:
+          version: npm bump
+          publish: npm release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
