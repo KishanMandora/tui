@@ -1,5 +1,11 @@
 # broker-ui
 
+## 0.0.4
+
+### Patch Changes
+
+- f6903c0: test
+
 ## 0.0.3
 
 ### Patch Changes
