@@ -1,5 +1,11 @@
 # broker-ui
 
+## 0.0.9
+
+### Patch Changes
+
+- b3a29c8: package json update
+
 ## 0.0.8
 
 ### Patch Changes
