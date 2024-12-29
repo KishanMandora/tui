@@ -11,7 +11,7 @@
     "storybook": "storybook dev -p 6006",
     "prepublishOnly": "npm run ci",
     "build-storybook": "storybook build",
-    "local-release": "changeset version && changeset publish"
+    "release": "changeset version && changeset publish"
   },
   "peerDependencies": {
     "react": ">=16.12.0",
