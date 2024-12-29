@@ -1,5 +1,5 @@
 {
-  "name": "broker-ui",
+  "name": "tbroker-ui",
   "version": "0.0.2",
   "type": "module",
   "scripts": {
