@@ -1,10 +1,11 @@
 type ButtonProps = {
-  text: string
+  text: string,
+  color: string,
 }
 
-function Button({ text }: ButtonProps) {
+function Button({ text, color }: ButtonProps) {
   return (
-    <button style={{ color: "red" }}>{text}</button>
+    <button style={{ color }}>{text}</button>
   )
 }
 
