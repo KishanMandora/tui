@@ -1,19 +1,31 @@
-const fs = require("fs");
-const path = require("path");
-const { exec } = require("@actions/exec");
+import { readFile, writeFile } from 'fs/promises';
+import { fileURLToPath } from 'url';
+import { dirname, join } from 'path';
+// Import exec using dynamic import
+import { createRequire } from 'module';
+const require = createRequire(import.meta.url);
+const { exec } = require('@actions/exec');
 
-process.chdir(path.join(__dirname, ".."));
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+// Change directory to project root
+process.chdir(join(__dirname, ".."));
 
 (async () => {
   await exec("changeset", ["version"]);
 
-  const releaseLine = `v${require("../package.json").version.split(".")[0]}`;
+  // Read package.json using dynamic import
+  const packageJson = JSON.parse(
+    await readFile(join(__dirname, "..", "package.json"), "utf8")
+  );
+  const releaseLine = `v${packageJson.version.split(".")[0]}`;
 
-  const readmePath = path.join(__dirname, "..", "README.md");
-  const content = fs.readFileSync(readmePath, "utf8");
+  const readmePath = join(__dirname, "..", "README.md");
+  const content = await readFile(readmePath, "utf8");
   const updatedContent = content.replace(
     /changesets\/action@[^\s]+/g,
     `changesets/action@${releaseLine}`
   );
-  fs.writeFileSync(readmePath, updatedContent);
+  await writeFile(readmePath, updatedContent);
 })();
