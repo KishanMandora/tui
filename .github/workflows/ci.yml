@@ -14,7 +14,7 @@ jobs:
   ci:
     runs-on: ubuntu-latest
 
-    # Add these permissions
+    # Add these permissions for pr and release
     permissions:
       contents: write
       pull-requests: write
